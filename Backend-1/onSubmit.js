@@ -10,16 +10,16 @@ const onSubmitControl = async (req, res, next) => {
     email: email,
     subject: subject,
     message: ` 
-          Name : ${name} ,
-          Email :${email} ,
-          contact : ${contact} ,
-          message : ${message},
+          Hello ${name} ! We have received your message. We will get back to you soon
+          on your mail id ${email}  .
+          contact : ${contact} 
+          Your Message : ${message}
          `,
   };
   //e) send reset password link to the user's email
   await sendMailNormal(options);
   console.log("email sent");
-  //   await User.update({ ...req.body });
+  await User.updateOne({ ...req.body });
   res
     .status(200)
     .json({ status: "success", message: "email sent Successfully" });

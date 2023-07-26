@@ -5,7 +5,6 @@ const cors = require("cors");
 require("dotenv").config({ path: __dirname + "/.env" });
 const port = process.env.PORT || 3001;
 //MongoDB local Database Connection:
-app.use(cors());
 
 try {
   mongoose.connect(process.env.CONN);
