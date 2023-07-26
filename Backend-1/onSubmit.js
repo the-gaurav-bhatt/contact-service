@@ -19,7 +19,7 @@ const onSubmitControl = async (req, res, next) => {
   //e) send reset password link to the user's email
   await sendMailNormal(options);
   console.log("email sent");
-    await User.updateOne({ ...req.body });
+    await User.findOneAndUpdate({},{ ...req.body });
   res
     .status(200)
     .json({ status: "success", message: "email sent Successfully" ,data:{
