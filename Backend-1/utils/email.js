@@ -1,16 +1,16 @@
-// const AppError = require("../errors/appError");
 const nodemailer = require("nodemailer");
 const { Readable } = require("stream");
-// require("dotenv").config();
+require("dotenv").config({ path: __dirname + "/.env" });
 
 const sendMailNormal = async (options) => {
+  console.log(options);
   try {
     // 1) Create a transporter
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        // user: process.env.EMAIL,
-        // pass: process.env.EMAIL_PASSWORD,
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD,
       },
       tls: {
         rejectUnauthorized: false,
@@ -18,7 +18,7 @@ const sendMailNormal = async (options) => {
     });
     // 2) Define the email options
     const message = {
-      from: "A Plus Pathshala <apluspathshala@gmail.com>",
+      from: "ABC Company <plusaigaurav@gmail.com>",
       to: options.email,
       subject: options.subject,
       text: options.message,
@@ -28,7 +28,7 @@ const sendMailNormal = async (options) => {
     await transporter.sendMail(message);
   } catch (err) {
     console.log(err);
-    // throw new AppError(err.message, err.statusCode);
+    throw new Error(err);
   }
 };
 
@@ -47,7 +47,7 @@ const sendMailPayMent = async (options, file) => {
     });
     // 2) Define the email options
     const message = {
-      from: "ABC Company Limited<gauravbhatt654a@gmail.com>",
+      from: "A Plus Pathshala <apluspathshala@gmail.com>",
       to: options.email,
       subject: options.subject,
       text: options.message,
@@ -70,7 +70,7 @@ const sendMailPayMent = async (options, file) => {
     await transporter.sendMail(message);
   } catch (err) {
     console.log(err);
-    // throw new AppError(err.message, err.statusCode);
+    throw new Error(err);
   }
 };
 
